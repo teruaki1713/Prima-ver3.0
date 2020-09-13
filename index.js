@@ -151,6 +151,7 @@ $(function(){
 	  $(".result").fadeOut();
 	  setTimeout('$(".box_Q").fadeIn();',500);
   });
+
   
    function more ()
    {
