@@ -1,3 +1,4 @@
+//内部リンク時の処理---------------------------------------------------------------
 $(function(){
 	$('a[href^="#"]').click(function(){
 	  //スクロールのスピード
@@ -151,7 +152,6 @@ $(function(){
 	  $(".result").fadeOut();
 	  setTimeout('$(".box_Q").fadeIn();',500);
   });
-
   
    function more ()
    {
@@ -224,6 +224,10 @@ $(function(){
   $("#ano").click(function (){
 	  window.open(url);
   });
+
+  $(".main_b").click(function () { $(".card").css('display','none'); $(".list").css('display','none'); $(".main").css('display','block'); });
+  $(".card_b").click(function () { $(".main").css('display','none'); $(".list").css('display','none'); $(".card").css('display','block'); });
+  $(".list_b").click(function () { $(".main").css('display','none'); $(".card").css('display','none'); $(".list").css('display','block'); });
   
   //採点ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let i = 0;
