@@ -152,6 +152,7 @@ main div.row {
 
 img {
 	width: 100%;
+	object-fit: cover;
 }
 
 .container-fluid h2 {
