@@ -31,7 +31,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-
 body {
 	line-height: 1;
 }
@@ -54,6 +53,17 @@ table {
 
 
 /************************************************************************************/
+
+div.main {
+	display: block;
+}
+div.card {
+	display: none;
+}
+div.list {
+	display: none;
+}
+
 
 /*fade in , fade out*/
 div#g1_1 {
