@@ -161,8 +161,9 @@ main div.row {
 }
 
 img {
-	width: 100vw;
-	height: auto;
+	width: auto;
+	height: 30vh;
+	margin: auto;
 }
 
 .container-fluid h2 {
