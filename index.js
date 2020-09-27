@@ -1,3 +1,165 @@
+var case_number = 1;
+
+var x=0;
+var y=0;
+var cases = 0;
+
+var Part = [
+  ["Part1"],
+  ["Part2"]
+]
+
+var hanni = [
+  [
+    [1,70] , [71,133] , [134,188] , [189,248] , [249,299],[300,354] , [355,400]
+  ] , 
+
+  [
+    [401,458] , [459,520]
+  ]
+]
+
+//footer
+$(".main_b").click(function(){
+  shadow();
+  $(".main_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
+  $(".page1").css("display","block");
+});
+
+$(".card_b").click(function(){
+  shadow();
+  $(".card_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
+  $(".page2").css("display","block");
+});
+
+$(".list_b").click(function(){
+  shadow();
+  $(".list_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
+  $(".page3").css("display","block");
+});
+
+function shadow() {
+  $(".main_b").css("box-shadow","none");
+  $(".card_b").css("box-shadow","none");
+  $(".list_b").css("box-shadow","none");
+  $(".page1").css("display","none");
+  $(".page2").css("display","none");
+  $(".page3").css("display","none");
+}
+
+//part選択
+for(var i=0; i<Part.length; i++){
+  console.log(i);
+  $(".parts_1").append(
+    '<section class="select_list main_2_'+(i+1)+' p2">'+
+    '<p><i class="fas fa-angle-double-right"></i><span>'+Part[i]+'</span></p>'+
+    '</section>'
+  );
+  $(".main_3").append('<div class="row select_1_'+(i+1)+'" style="display: none;"></div>');
+}
+
+for(var i=0; i<Part.length; i++){
+  console.log(i);
+  $(".parts_2").append(
+    '<section class="select_list card_2_'+(i+1)+' p5">'+
+    '<p><i class="fas fa-angle-double-right"></i><span>'+Part[i]+'</span></p>'+
+    '</section>'
+  );
+  $(".card_3").append('<div class="row select_2_'+(i+1)+'" style="display: none;"></div>');
+}
+
+/*$(".select").append(
+    '<section id="g1_3_'+(i+1)+'" class="g1_3b select_list">'+
+    	'<p><i class="fas fa-angle-right"></i>'+hanni[i][0]+'〜'+hanni[i][1]+'</p>'+
+		'</section>'
+  );*/
+
+//範囲の選択
+for(var i=0; i<hanni.length ; i++){
+  for(var ii=0 ; ii < hanni[i].length ; ii++){
+    $(".select_1_"+(i+1)).append(
+      '<section class="select_list p3" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+'; console.log(x,y)">'+
+        '<p><i class="fas fa-angle-right"></i>'+hanni[i][ii][0]+'〜'+hanni[i][ii][1]+'</p>'+
+      '</section>'
+    );
+    console.log(ii);
+  }
+}
+
+for(var i=0; i<hanni.length ; i++){
+  for(var ii=0 ; ii < hanni[i].length ; ii++){
+    $(".select_2_"+(i+1)).append(
+      '<section class="select_list p6" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+'; console.log(x,y)">'+
+        '<p><i class="fas fa-angle-right"></i>'+hanni[i][ii][0]+'〜'+hanni[i][ii][1]+'</p>'+
+      '</section>'
+    );
+    console.log(ii);
+  }
+}
+
+//グラフ
+function chart ( maru , batu){
+  new Chart(document.getElementById("myChart"), {
+    type: "doughnut",
+    data: {
+      labels: ["正解", "不正解"],
+      datasets: [
+        {
+          data: [maru,batu],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)"
+          ]
+        }
+      ]
+    }
+  });
+}
+
+//---------------------------------------------------------------------------------------------
+//ボタン操作
+$(".p1").click(function(){
+  $(".main_1").css("display","none");
+  $(".main_2").css("display","block");
+});
+
+$(".p2").click(function(){
+  $(".main_2").css("display","none");
+  $(".main_3").css("display","block");
+});
+
+$(".p4").click(function(){
+  $(".card_1").css("display","none");
+  $(".card_2").css("display","block");
+});
+
+$(".p5").click(function(){
+  $(".card_2").css("display","none");
+  $(".card_3").css("display","block");
+});
+
+//partが増えた際は、必ずここを編集して下さい。
+$(".main_2_1").click(function(){$(".select_1_1").css("display","block");});
+$(".main_2_2").click(function(){$(".select_1_2").css("display","block");});
+
+$(".card_2_1").click(function(){$(".select_2_1").css("display","block");});
+$(".card_2_2").click(function(){$(".select_2_2").css("display","block");});
+
+$(".p3").click(function(){
+  $(".main_3").css("display","none");
+  $(".main_4").css("display","block");
+  cases=1;
+});
+
+$(".p6").click(function(){
+  $(".card_3").css("display","none");
+  $(".card_4").css("display","block");
+  pre();
+  cases=2;
+});
+
+
+
 //内部リンク時の処理---------------------------------------------------------------
 $(function(){
 	$('a[href^="#"]').click(function(){
@@ -179,58 +341,19 @@ $(function(){
      document.form.reset();
    }
   
-  //問題の範囲を選択ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  var x = 0;
-  var y = 0;
-  
-  //Part select
-  $("#all_part").click(function () {setTimeout('$(".p0,.p1,.p2").fadeIn();',500);});
-  $("#g1_2_1").click(function () {$("#g1_2").fadeOut(); setTimeout('$("#g1_3").fadeIn();',500);});
-  $("#g1_2_2").click(function () {$("#g1_2").fadeOut(); setTimeout('$("#g1_3").fadeIn();',500);});
-  
-  //Part1
-  $("#g1_3_1").click(function () { x = 1; 	y =  70;});
-  $("#g1_3_2").click(function () { x = 71; 	y = 133;});
-  $("#g1_3_3").click(function () { x = 134; 	y = 188;});
-  $("#g1_3_4").click(function () { x = 189; 	y = 248;});
-  $("#g1_3_5").click(function () { x = 249; 	y = 299;});
-  $("#g1_3_6").click(function () { x = 300; 	y = 354;});
-  $("#g1_3_7").click(function () { x = 355; 	y = 400;});
-  
-  //Part2
-  $("#g1_3_8").click(function () { x = 401; 	y =  458;});
-  $("#g1_3_9").click(function () { x = 459; 	y =  520;});
-  
-  $(".g1_3b").click(function (){
-	  $("#g1_3").fadeOut();
-      setTimeout('$("#g1_4").fadeIn();',500);
-      console.log(x);
-      console.log(y);
-      console.log(ques);
-  });
-  
-  
-  $(".part_b").click(function (){ $(".step2").fadeOut(); setTimeout('$(".step3").fadeIn();',500); });
-  
   //ボタンを押した時の処理ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  var ques = question3;
-  $("#g1_1_1").click(function () {ques = question2; $("#g1_1").fadeOut(); setTimeout('$("#g1_2").fadeIn();',500);});
-  $("#g1_1_2").click(function () {ques = question3; $("#g1_1").fadeOut(); setTimeout('$("#g1_2").fadeIn();',500);});
-  //$("#button2_2").click(function () {ques = question1; $(".step1").fadeOut(); setTimeout('$(".step2").fadeIn();',500);});
-  
+  let ques = question3;
   let ur = "ここで発音を確認できます。";
   let url = 'https://www.google.com/search?rlz=1C5CHFA_enJP892JP892&sxsrf=ALeKk00q8VFxTZwYwqx8jw6cM6r5cc74hQ%3A1598150874115&ei=2thBX8fKBs-JoAT_6LX4DA&q='+ur+'+発音';
   
+  
+
   $("#ano").click(function (){
 	  window.open(url);
   });
 
-  $(".main_b").click(function () { $(".card").css('display','none'); $(".list").css('display','none'); $(".main").css('display','block'); });
-  $(".card_b").click(function () { $(".main").css('display','none'); $(".list").css('display','none'); $(".card").css('display','block'); });
-  $(".list_b").click(function () { $(".main").css('display','none'); $(".card").css('display','none'); $(".list").css('display','block'); });
-  
   //採点ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  let i = 0;
+  var i = 0;
   function checking ()
   {
 	  if (i==0){
@@ -243,19 +366,24 @@ $(function(){
   }
   
   //キーボードの操作ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  function hoge(code)
+  /*function hoge(code)
+  {
+	  
+  }*/
+
+  /*function hoge(code)
   {
 	  //エンターキー押下なら
-	  if(13 === code)
-	  {
-		  result = document.getElementById("form").value;
-		  checking();
-	  }
-	  if(32 === code)
-	  {
-		  event.preventDefault()
-	  }
-  }
+    if(13 === code)
+    {
+      result = document.getElementById("form").value;
+      checking();
+    }
+    if(32 === code)
+    {
+      event.preventDefault()
+    }
+  }*/
   
   //採点関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let ok=		0;
@@ -271,11 +399,11 @@ $(function(){
 	  {
 		  ok++;
 		  $check.text("⭕️正解です");
-		  $PN.text("正答率：" + (Math.floor((ok/i1)*100)) +"％");
+      $PN.text((Math.floor((ok/i1)*100)));
 	  }else if(result !==　answer)
 	  {
 		  $check.text("❌"+"正解は　"+answer+"　です");
-		  $PN.text("正答率：" + (Math.floor((ok/i1)*100)) +"％");
+      $PN.text((Math.floor((ok/i1)*100)));
 	  }
   }
   //問題表示関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -291,33 +419,22 @@ $(function(){
 	  select2=y;
   }
   
-  //問題を表示するランダム関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  /*function question1 (){
-	  i1++;
-	  select();
-	  alert1();
-	  num	=	select2-select1+1;
-	  random 	=	Math.floor( Math.random() * num)+select1-1;
-	  $("#QN").text(i1+""+words[random][1]);
-	  $("#WN").text("No."+(random+1));
-	  answer = words[random][0];
-	  document.form.reset();
-  }*/
-  
   //問題を順番に表示する関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let iq=0;
-  function question2 ()
+  function question2()
   {
+    select();
 	  if(iq+select1>select2)
 	  {
-		  $(".box_Q").fadeOut(); setTimeout('$(".result").fadeIn();',500);
-		  $("#correct").text(ok);
-		  $("#incorrect").text((y-x+1)-ok);
-		  $("#par").text(Math.floor((ok/i1)*100));
+      $(".result_1").text((Math.floor((ok/i1)*100))+"%");
+      $(".result_2").text(ok);
+      $(".result_3").text((select2 - select1 + 1) - ok);
+
+      $(".main_4").css("display","none")
+      $(".main_5").css("display","block")
+      chart(ok,(select2 - select1 + 1));
 		  return false;
 	  }
-	  alert1();
-	  select();
 	  let num2=iq+select1;
 	  iq++;
 	  i1++;
@@ -325,7 +442,7 @@ $(function(){
 	  $("#check").text("問："+words[num2-1][1]);
 	  ur = words[num2-1][0];
 	  url = 'https://www.google.com/search?rlz=1C5CHFA_enJP892JP892&sxsrf=ALeKk00q8VFxTZwYwqx8jw6cM6r5cc74hQ%3A1598150874115&ei=2thBX8fKBs-JoAT_6LX4DA&q='+ur+'+発音';
-	  $("#WN").text("No."+(num2));
+	  $("#WN").text((num2));
 	  answer = words[num2-1][0];
 	  document.form.reset();
   }
@@ -338,20 +455,18 @@ $(function(){
 	  iq2++;
 	  if(iq2+select1-1>select2)
 	  {
-		  $(".box_Q").fadeOut(); setTimeout('$(".result").fadeIn();',500);
-		  $("#correct").text(ok);
-		  $("#incorrect").text((y-x+1)-ok);
-		  $("#par").text(Math.floor((ok/i1)*100));
+      $(".main_4").css("display","none")
+      $(".main_5").css("display","block")
+      chart(ok,(select2 - select1 + 1));
 		  return false;
 	  }
-	  alert1();
 	  i1++;
 	  norandom();
 	  $("#QN").text(i1);
 	  $("#check").text("問："+words[random7][1]);
 	  ur = words[random7][0];
 	  url = 'https://www.google.com/search?rlz=1C5CHFA_enJP892JP892&sxsrf=ALeKk00q8VFxTZwYwqx8jw6cM6r5cc74hQ%3A1598150874115&ei=2thBX8fKBs-JoAT_6LX4DA&q='+ur+'+発音';
-	  $("#WN").text("No."+(random7+1));
+	  $("#WN").text((random7+1));
 	  answer = words[random7][0];
 	  document.form.reset();
   }
@@ -386,13 +501,166 @@ $(function(){
 		  num7.push(random7);
 	  }
   }
-  
-  //アラートーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  function alert1()
-  {
-	  if(select1>select2)	{alert("範囲選択の数値に誤りがあります。左側の数値が右側の数値よりも大きくなっていませんか？");}
-	  if(select1>words.length){alert("最小値が選択可能範囲を超えています");}
-	  if(select2>words.length){alert("最大値が選択可能範囲を超えています");}
+
+  //カード----------------------------------------------------------------------------------------------
+//高さの指定
+var main_height = window.innerHeight;
+$('main').css("min-height",main_height);
+
+//処理
+/*
+var x = 1;
+var y = 100;*/
+
+function pre() {
+  for (var is=0; is < (y - x)+1 ; is++){
+    console.log(x,y,y-x+1);
+    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(x+i-1)+'">'+words[x+is-1][0]+'</h1></div>');
+    if(is>0){
+      $('div#page'+(is)).css("display","none");
+    }
   }
+}
+
+//進む、戻る、裏返す
+var now =0;
+var ii = 0;
+
+//切り替え
+function draw_after(){
+    console.log(now);
+    $("div#page"+(now - 1)).css("display","none");
+    $("h1#text"+(now - 1)).text(words[x+now-2][0]);
+    $("main.card_main").css("transform","rotateY(0deg)");
+    $("div#page"+now).css("display","block");
+    ii=0;
+    $(".now").text(now + 1);
+}
+
+function draw_before(){
+    console.log(now);
+    $("div#page"+(now + 1)).css("display","none");
+    $("h1#text"+(now + 1)).text(words[x+now][0]);
+    $("main.card_main").css("transform","rotateY(0deg)");
+    $("div#page"+now).css("display","block");
+    ii=0;
+    $(".now").text(now + 1);
+}
+
+function draw_right() {
+    now++;
+    $("main").css("transform","rotateY(90deg)");
+    setTimeout(draw_after,300);
+}
+
+function draw_left(){
+    now--;
+    $("main").css("transform","rotateY(90deg)");
+    setTimeout(draw_before,300);
+}
+
+//回転
+function draw_turn0 (){
+    $("h1#text"+now).text(words[x+now-1][1]);
+    $("main").css("transform","rotateX(0deg)");
+}
+
+function draw_turn1 (){
+    $("h1#text"+now).text(words[x+now-1][0]);
+    $("main").css("transform","rotateX(0deg)");
+}
+
+function draw_turn(){
+    if(ii === 0){
+        $("main").css("transform","rotateX(90deg)");
+        setTimeout(draw_turn0,300);
+        console.log(ii);
+        ii++;
+    }
+    else if(ii === 1){
+        $("main").css("transform","rotateX(90deg)");
+        setTimeout(draw_turn1,300);
+        console.log(ii);
+        ii--;
+    }
+}
+
+//スワイプ
+var xs;
+var xe;
+var dist = 30;
+
+document.body.addEventListener( "touchstart", function( event ) {
+	var touchObject = event.changedTouches[0] ;
+
+	xs = touchObject.pageX ;
+    console.log(xs);
+} ) ;
+
+document.body.addEventListener( "touchend", function( event ) {
+	var touchObject = event.changedTouches[0] ;
+
+	xe = touchObject.pageX ;
+    console.log(xe);
+
+    swipe();
+} ) ;
+
+function swipe() {
+    if(cases === 2){
+      if(xs + dist < xe && xs - xe < 0){//左から右へ　▶
+        console.log("▶");
+        draw_left();
+      }
+      else if(xe < xs - dist && xs - xe > 0){//右から左へ　◀
+          console.log("◀");
+          draw_right();
+      }
+      else if(xe === xe){
+          console.log("■");
+          draw_turn();
+      }
+    }
+}
+
+//キーの処理
+window.addEventListener("keydown", handleKeydown);
+
+function handleKeydown(event){
+  // キーコード
+  var keyCode = event.keyCode;
+  console.log("押されたキーのコード : " + keyCode);
+
+  //cases = 1;
+
+    if(cases === 1){
+      if(13 === keyCode)
+      {
+        result = document.getElementById("form").value;
+        checking();
+      }
+      if(32 === keyCode)
+      {
+        event.preventDefault()
+      }
+    }
+
+    if(cases === 2){
+      if(keyCode == 39 || keyCode == 68 || keyCode == 13) {
+        draw_right();
+      }
+
+      if(keyCode == 37|| keyCode == 65 || keyCode == 8) {
+          draw_left();
+      }
+
+      if(keyCode == 38 || keyCode == 40 || keyCode == 87 || keyCode == 83 || keyCode == 32) {
+          draw_turn();
+      }
+    }
+
+}
+
+
   
   
