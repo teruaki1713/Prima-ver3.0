@@ -517,7 +517,7 @@ var y = 100;*/
 function pre() {
   for (var is=0; is < (y - x)+1 ; is++){
     console.log(x,y,y-x+1);
-    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(x+i-1)+'">'+words[x+is-1][0]+'</h1></div>');
+    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(x+is-1)+'">'+words[x+is-1][0]+'</h1></div>');
     if(is>0){
       $('div#page'+(is)).css("display","none");
     }
