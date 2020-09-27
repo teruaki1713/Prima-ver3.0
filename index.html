@@ -17,291 +17,171 @@
 </head>
 <body>
 
-	<!--main-->
-	<div class="main">
+	<!-- javascript用のボタン　クラス名　命名ルール
 
-		<header>
-		
-		</header>
+		class = " (main or card or list) _ page数 _ page内でのボタンの番号 "
+		グループ p + グループの順番
+
+		例：class="main_1_4"
+
+		表示用のboxに対する　クラス名　命名ルール
+
+		class = " (main or card or list) _ page数"
+		 > class = " (main or card or list) _ page数 / 番号 "
+
+		例：class="main_1";
+				class="main_1/1"
 	
-		<main>
-			<div class="container-fluid">
-	
-				<!--page1---------------------------->
-				<div id="g1_1">
-					<div class="row">
-						<h2>記述式で英単語を勉強しよう</h2>
-						<img src="undraw_road_to_knowledge_m8s0.png" alt="">
+	-->
+
+	<div class="container-fluid">
+
+		<div class="case">
+
+			<div class="main">
+
+				<div class="page1" style="display: block;">
+					<div class="first_page main_1" style="display: block">
+						<div class="row">
+							<h2>記述式で英単語を勉強しよう</h2>
+							<img src="undraw_road_to_knowledge_m8s0.png" alt="">
+						</div>
+						<div class="row kind">
+							<section class="select_list main_1_1 p1" onclick="ques = question2">
+								<p><i class="fas fa-sort-amount-up"></i><span>順番</span></p>
+							</section>
+							<section class="select_list main_1_2 p1" onclick="ques = question3">
+								<p><i class="fas fa-random"></i><span>ランダム</span></p>
+							</section>
+						</div>
 					</div>
+
+					<div class="second_page main_2" style="display: none">
+						<div class="row">
+							<h2>Part を選択しよう</h2>
+							<img src="undraw_Choose_bwbs.png" alt="">
+						</div>
+						<div class="row parts_1"></div>
+					</div>
+
+					<div class="third_page main_3" style="display: none">
+						<div class="row">
+							<h2>範囲を選択しよう</h2>
+							<img src="undraw_select_option_y75i.png" alt="">
+						</div>
+					</div>
+
+					<div class="fourth_page main_4" style="display: none">
+						<header>
+							<ul>
+								<li><span id="QN">0</span>問目</li>
+								<li>No.<span id="WN">0</span></li>
+								<li>正答率：<span id="PN">100</span>%</li>
+							</ul>
+						</header>
+						<h3 id="check">問：<span>sample text</span></h3>
+						<form name="form">
+							<input type="text" name="" value="" class="none" style="display:none;">
+							<input type="text" id="form" autocomplete="off" placeholder="回答を入力">
+						</form>
+						<nav>
+							<button><i class="fas fa-volume-up" id="ano"></i></button>
+							<button><i class="fas fa-lightbulb" id="hin"></i></button>
+						</nav>
+						<div class="buttons">
+							<button>やり直す</button>
+							<button>ホームに戻る</button>
+						</div>
+					</div>
+
+					<div class="row fifth_page main_5" style="display: none;">
+						<h2>結果</h2>
+
+						<canvas id="myChart"></canvas>
+
+						<ul class="result">
+							<li><span class="left">正答率</span><span class="right result_1">100%</span></li>
+							<li><span class="left">正解数</span><span class="right result_2">100</span></li>
+							<li><span class="left">不正解数</span><span class="right result_3">100</span></li>
+						</ul>
+
+						<div class="buttons">
+							<button>間違えた問題のみ</button>
+							<button class="harf">もう一度</button>
+							<button class="harf">ホームに戻る</button>
+						</div>
+
+					</div>
+
+				</div>
 		
-					<div class="row select">
-		
-						<section id="g1_1_1">
-							<i class="fas fa-sort-amount-up"></i>
-							<p>
-								順番
-							</p>
-						</section>
-		
-						<section id="g1_1_2">
-							<i class="fas fa-random"></i>
-							<p>
-								ランダム
-							</p>
-						</section>
-		
+				<div class="page2" style="display: none;">
+					<div class="card_1">
+						<div class="row">
+							<h2>暗記カードで英単語を勉強しよう</h2>
+							<img src="undraw_environmental_study_skau.png" alt="">
+						</div>
+						<div class="row kind">
+							<section class="select_list main_1_1 p4" onclick="ques = question2">
+								<p><i class="fas fa-sort-amount-up"></i><span>順番</span></p>
+							</section>
+							<section class="select_list main_1_2 p4" onclick="ques = question3">
+								<p><i class="fas fa-random"></i><span>ランダム</span></p>
+							</section>
+						</div>
+					</div>
+
+					<div class="card_2" style="display: none;">
+						<div class="row">
+							<h2>Part を選択しよう</h2>
+							<img src="undraw_Choose_bwbs.png" alt="">
+						</div>
+						<div class="row parts_2"></div>
+					</div>
+
+					<div class="card_3" style="display: none;">
+						<div class="row">
+							<h2>範囲を選択しよう</h2>
+							<img src="undraw_select_option_y75i.png" alt="">
+						</div>
+					</div>
+					
+					<div class="card_4" style="display: none;">
+						<p class="now">1</p>
+						<div class="cross"><p>✗</p></div>
+						<main class="card_main">
+						</main>
 					</div>
 				</div>
-	
-	
-	
-				<!--page2------------------------->
-				<div id="g1_2">
+		
+				<div class="page3" style="display: none;">
 					<div class="row">
-						<h2>Part を選択しよう</h2>
-						<img src="undraw_Choose_bwbs.png" alt="">
-					</div>
-		
-					<div class="row select">
-		
-						<section id="g1_2_1" class="g1_2b">
-							<i class="fas fa-angle-double-right"></i>
-							<p>
-								Part１
-							</p>
-						</section>
-		
-						<section id="g1_2_2" class="g1_2b">
-							<i class="fas fa-angle-double-right"></i>
-							<p>
-								Part２
-							</p>
-						</section>
-		
+						<h2>現在開発中・・・</h2>
 					</div>
 				</div>
-	
-				<!--page3------------------------->
-				<div id="g1_3">
-					<div class="row">
-						<h2>単語の範囲を選択しよう</h2>
-						<img src="undraw_select_option_y75i.png" alt="">
-					</div>
-	
-						<div class="row select g1_1_p1">
-		
-							<section id="g1_3_1" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									1〜70
-								</p>
-							</section>
-			
-							<section id="g1_3_2" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									71〜133
-								</p>
-							</section>
-	
-							<section id="g1_3_3" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									134〜188
-								</p>
-							</section>
-	
-							<section id="g1_3_4" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									189〜248
-								</p>
-							</section>
-	
-							<section id="g1_3_5" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									249〜299
-								</p>
-							</section>
-	
-							<section id="g1_3_6" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									300〜354
-								</p>
-							</section>
-	
-							<section id="g1_3_7" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									355〜400
-								</p>
-							</section>
-			
-						</div>
-	
-						<div class="row select g1_1_p2">
-		
-							<section id="g1_3_8" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									401〜458
-								</p>
-							</section>
-			
-							<section id="g1_3_9" class="g1_3b">
-								<i class="fas fa-angle-right"></i>
-								<p>
-									459〜520
-								</p>
-							</section>
-			
-						</div>
-	
-					</div>
-	
-					<!--page4------------------------->
-					<div id="g1_4">
-						<div class="row" style="margin-top: 1em;">
-							<header class="row">
-								<div class="num">
-									<p id="number"><span id="QN">0</span>問目</p>
-								</div>
-								<div class="No">
-									<p id="WN">No.0</p>
-								</div>
-								<div class="ok">
-									<p id="PN">正答率：0</p>
-								</div>
-							</header>
-							<main>
-								<div class="h1">
-									<h1 id="check">問：sample text</h1>
-								</div>
-								<form action="" name="form">
-									<input type="text" class="input" id="form" autocomplete="off" onkeypress="hoge(event.keyCode);" placeholder="回答を入力"/></input>
-									<p class="fas fa-volume-up" id="ano"></p>
-									<p class="fas fa-lightbulb" id="hin"></p>
-									<input type="text" name="" value="" class="none" style="display:none;">
-								</form>
-							</main>
-	
-							<footer>
-								<div>
-									<button class="re more">やり直す</button>
-									<div class="under_button">
-										<button class="reset">ホームに戻る</button>
-									</div>
-								</div>
-							</footer>
-	
-						</div>
-	
-					</div>
-	
-				</div>
-	
-				
-	
+
 			</div>
-		</main>
 	
-		<footer>
-			<nav>
-				<div class="row">
-					<a class="now"><i class="fas fa-pen"></i></a>
-					<a class="card_b"><i class="fas fa-window-restore"></i></a>
-					<a class="list_b"><i class="fas fa-th-list"></i></a>
-				</div>
-			</nav>
-		</footer>
+		</div>
 
 	</div>
 
-	<!--card-->
-	<div class="card">
-
-		<header>
-		
-		</header>
-	
-		<main>
-			<div class="container-fluid">
-				
-				<div class="row">
-					<h2>暗記カードで英単語を勉強しよう</h2>
-					<img src="undraw_environmental_study_skau.png" alt="">
-				</div>
-	
-				<div class="row select">
-	
-					<section id="g1_1_1">
-						<i class="fas fa-sort-amount-up"></i>
-						<p>
-							順番
-						</p>
-					</section>
-	
-					<section id="g1-1-2">
-						<i class="fas fa-random"></i>
-						<p>
-							ランダム
-						</p>
-					</section>
-	
-				</div>
-	
+	<footer>
+		<nav>
+			<div class="row">
+				<a class="main_b" style="box-shadow: 0 0 5px 2px rgba(69, 69, 201, 0.39);"><i class="fas fa-pen"></i></a>
+				<a class="card_b"><i class="fas fa-window-restore"></i></a>
+				<a class="list_b"><i class="fas fa-th-list"></i></a>
 			</div>
-		</main>
-	
-		<footer>
-			<nav>
-				<div class="row">
-					<a class="main_b"><i class="fas fa-pen"></i></a>
-					<a class="now"><i class="fas fa-window-restore"></i></a>
-					<a class="list_b"><i class="fas fa-th-list"></i></a>
-				</div>
-			</nav>
-		</footer>
-
-	</div>
-
-	<!--list-->
-	<div class="list">
-
-		<header>
-		
-		</header>
-	
-		<main>
-			<div class="container-fluid">
-				
-				<div class="row">
-					<h2>英単語一覧</h2>
-					<img src="undraw_Scrum_board_re_wk7v.png" alt="">
-				</div>
-	
-			</div>
-		</main>
-	
-		<footer>
-			<nav>
-				<div class="row">
-					<a class="main_b"><i class="fas fa-pen"></i></a>
-					<a class="card_b"><i class="fas fa-window-restore"></i></a>
-					<a class="now"><i class="fas fa-th-list"></i></a>
-				</div>
-			</nav>
-		</footer>
-
-	</div>
+		</nav>
+	</footer>
 
 <!--Bootstrap JS-->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <!--end-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="index.js" type="text/javascript"></script>
 </body>
