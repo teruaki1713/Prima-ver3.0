@@ -1,3 +1,5 @@
+console.log("こ　う　し　ん　か　ん　り　ょ　う　で　す　。");
+
 var case_number = 1;
 
 var x=0;
