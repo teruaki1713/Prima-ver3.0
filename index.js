@@ -1,4 +1,4 @@
-console.log("こ　う　し　ん　か　ん　り　ょ　う　で　す　。");
+console.log("こ　う　し　ん　か　ん　り　ょ　う");
 
 var case_number = 1;
 
