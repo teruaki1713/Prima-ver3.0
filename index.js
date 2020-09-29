@@ -1,4 +1,4 @@
-console.log("こ　う　し　ん　か　ん　り　ょ　う");
+console.log("こ　う　し　ん");
 
 var case_number = 1;
 
@@ -26,18 +26,22 @@ $(".main_b").click(function(){
   shadow();
   $(".main_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
   $(".page1").css("display","block");
+  home2();
 });
 
 $(".card_b").click(function(){
   shadow();
   $(".card_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
   $(".page2").css("display","block");
+  home1();
 });
 
 $(".list_b").click(function(){
   shadow();
   $(".list_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
   $(".page3").css("display","block");
+  home1();
+  home2();
 });
 
 function shadow() {
@@ -51,7 +55,6 @@ function shadow() {
 
 //part選択
 for(var i=0; i<Part.length; i++){
-  console.log(i);
   $(".parts_1").append(
     '<section class="select_list main_2_'+(i+1)+' p2">'+
     '<p><i class="fas fa-angle-double-right"></i><span>'+Part[i]+'</span></p>'+
@@ -61,7 +64,6 @@ for(var i=0; i<Part.length; i++){
 }
 
 for(var i=0; i<Part.length; i++){
-  console.log(i);
   $(".parts_2").append(
     '<section class="select_list card_2_'+(i+1)+' p5">'+
     '<p><i class="fas fa-angle-double-right"></i><span>'+Part[i]+'</span></p>'+
@@ -80,22 +82,20 @@ for(var i=0; i<Part.length; i++){
 for(var i=0; i<hanni.length ; i++){
   for(var ii=0 ; ii < hanni[i].length ; ii++){
     $(".select_1_"+(i+1)).append(
-      '<section class="select_list p3" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+'; console.log(x,y)">'+
+      '<section class="select_list p3" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+';">'+
         '<p><i class="fas fa-angle-right"></i>'+hanni[i][ii][0]+'〜'+hanni[i][ii][1]+'</p>'+
       '</section>'
     );
-    console.log(ii);
   }
 }
 
 for(var i=0; i<hanni.length ; i++){
   for(var ii=0 ; ii < hanni[i].length ; ii++){
     $(".select_2_"+(i+1)).append(
-      '<section class="select_list p6" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+'; console.log(x,y)">'+
+      '<section class="select_list p6" onclick="x = '+hanni[i][ii][0]+'; y = '+hanni[i][ii][1]+';">'+
         '<p><i class="fas fa-angle-right"></i>'+hanni[i][ii][0]+'〜'+hanni[i][ii][1]+'</p>'+
       '</section>'
     );
-    console.log(ii);
   }
 }
 
@@ -144,6 +144,78 @@ $(".p5").click(function(){
 $(".main_2_1").click(function(){$(".select_1_1").css("display","block");});
 $(".main_2_2").click(function(){$(".select_1_2").css("display","block");});
 
+//ホームに戻るボタン
+$(".home1").click(function(){
+  home1();
+});
+
+$(".home2").click(function(){
+  home2();
+});
+
+function home1 (){
+  x=0;
+  y=0;
+  ok=		0;
+	i=		0;
+  result=	0;
+  $(".main_2").css("display","none");
+  $(".main_3").css("display","none");
+  $(".main_4").css("display","none");
+  $(".main_5").css("display","none");
+  $(".main_1").css("display","block");
+  random=	0;
+	 i1=		0;
+	 answer=	0;
+	 select1=	0;
+	 select2=	0;
+	 num=		0;
+	 iq=		0;
+	 iq2=		0;
+	 random7=	0;
+	 push=	0;
+	 num7=   [];
+	 i9=		0;
+	 ver=		0;
+	 n = 		0;
+	 $("#check").	text("問：sample text");
+	 $("#PN").	text("0");
+	 $("#QN").	text("0");
+   $("#WN").	text("0");
+   document.form.reset();
+   cases = 0;
+}
+
+function home2 (){
+  x=0;
+  y=0;
+  ok=		0;
+  i=		0;
+  ii = 0;
+  now = 0;
+  is = 0;
+  $(".card_2").css("display","none");
+  $(".card_3").css("display","none");
+  $(".card_4").css("display","none");
+  $(".card_1").css("display","block");
+  cases = 0;
+  $('main.card_main').html('');
+}
+
+var japanese = 3;
+var english  = 3;
+
+
+$(".card_1_1").click(function() {
+  japanese = 1;
+  english  = 0;
+});
+
+$(".card_1_2").click(function() {
+  japanese = 0;
+  english  = 1;
+});
+
 $(".card_2_1").click(function(){$(".select_2_1").css("display","block");});
 $(".card_2_2").click(function(){$(".select_2_2").css("display","block");});
 
@@ -158,8 +230,13 @@ $(".p6").click(function(){
   $(".card_4").css("display","block");
   pre();
   cases=2;
+  setTimeout(p6(),0);
 });
 
+function p6(){
+  $(".now").text(now + 1);
+  console.log("aaa");
+}
 
 
 //内部リンク時の処理---------------------------------------------------------------
@@ -292,6 +369,8 @@ $(function(){
    ["tax","税金"], ["expense","費用"], ["debt","借金"], ["deposit","預金"], ["charge","料金"],
    ["wage","賃金"], ["recession","不況"], ["consume","消費する"], ["waste","浪費する"], ["invest","投資する"]
    ];
+
+  
   
    //もう一度ボタンーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   $(".reset").click(function () {
@@ -313,8 +392,8 @@ $(function(){
   
   $(".more").click(function (){
 	  more();
-	  $(".result").fadeOut();
-	  setTimeout('$(".box_Q").fadeIn();',500);
+    $(".main_5").css("display","none");
+    $(".main_4").css("display","block");
   });
   
    function more ()
@@ -337,11 +416,16 @@ $(function(){
 	 ver=		0;
 	 n = 		0;
 	 $("#check").	text("問：sample text");
-	 $("#PN").	text("正答率：0");
+	 $("#PN").	text("0");
 	 $("#QN").	text("0");
-     $("#WN").	text("No.0");
-     document.form.reset();
+   $("#WN").	text("0");
+   document.form.reset();
    }
+
+
+  //間違えた問題のみの処理
+  const old_words = words;
+  var new_words = [];
   
   //ボタンを押した時の処理ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let ques = question3;
@@ -366,27 +450,7 @@ $(function(){
 		  getValue();
 	  }
   }
-  
-  //キーボードの操作ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  /*function hoge(code)
-  {
-	  
-  }*/
 
-  /*function hoge(code)
-  {
-	  //エンターキー押下なら
-    if(13 === code)
-    {
-      result = document.getElementById("form").value;
-      checking();
-    }
-    if(32 === code)
-    {
-      event.preventDefault()
-    }
-  }*/
-  
   //採点関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let ok=		0;
   let result=	0;
@@ -406,6 +470,7 @@ $(function(){
 	  {
 		  $check.text("❌"+"正解は　"+answer+"　です");
       $PN.text((Math.floor((ok/i1)*100)));
+      new_words.push([]);
 	  }
   }
   //問題表示関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -457,6 +522,10 @@ $(function(){
 	  iq2++;
 	  if(iq2+select1-1>select2)
 	  {
+      $(".result_1").text((Math.floor((ok/i1)*100))+"%");
+      $(".result_2").text(ok);
+      $(".result_3").text((select2 - select1 + 1) - ok);
+
       $(".main_4").css("display","none")
       $(".main_5").css("display","block")
       chart(ok,(select2 - select1 + 1));
@@ -516,8 +585,8 @@ var y = 100;*/
 
 function pre() {
   for (var is=0; is < (y - x)+1 ; is++){
-    console.log(x,y,y-x+1);
-    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(x+is-1)+'">'+words[x+is-1][0]+'</h1></div>');
+    console.log(words[x+is-1][japanese]);
+    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(is)+'">'+words[x+is-1][japanese]+'</h1></div>');
     if(is>0){
       $('div#page'+(is)).css("display","none");
     }
@@ -530,9 +599,8 @@ var ii = 0;
 
 //切り替え
 function draw_after(){
-    console.log(now);
     $("div#page"+(now - 1)).css("display","none");
-    $("h1#text"+(now - 1)).text(words[x+now-2][0]);
+    $("h1#text"+(now - 1)).text(words[x+now-2][japanese]);
     $("main.card_main").css("transform","rotateY(0deg)");
     $("div#page"+now).css("display","block");
     ii=0;
@@ -540,9 +608,8 @@ function draw_after(){
 }
 
 function draw_before(){
-    console.log(now);
     $("div#page"+(now + 1)).css("display","none");
-    $("h1#text"+(now + 1)).text(words[x+now][0]);
+    $("h1#text"+(now + 1)).text(words[x+now][japanese]);
     $("main.card_main").css("transform","rotateY(0deg)");
     $("div#page"+now).css("display","block");
     ii=0;
@@ -550,39 +617,47 @@ function draw_before(){
 }
 
 function draw_right() {
-    now++;
-    $("main").css("transform","rotateY(90deg)");
-    setTimeout(draw_after,300);
+    if(now+1 < (y - x + 1)){
+      now++;
+      $("main").css("transform","rotateY(90deg)");
+      setTimeout(draw_after,300);
+    }
+    
 }
 
 function draw_left(){
-    now--;
-    $("main").css("transform","rotateY(90deg)");
+    if(now-1 >= 0){
+      now--;
+      $("main").css("transform","rotateY(90deg)");
     setTimeout(draw_before,300);
+    }
+    
 }
 
 //回転
 function draw_turn0 (){
-    $("h1#text"+now).text(words[x+now-1][1]);
+    console.log("japanese:"+japanese,"english:"+english);
+    $("h1#text"+now).text(words[x+now-1][english]);
     $("main").css("transform","rotateX(0deg)");
+    console.log(words[x+now-1][english]);
 }
 
 function draw_turn1 (){
-    $("h1#text"+now).text(words[x+now-1][0]);
+    console.log("japanese:"+japanese,"english:"+english);
+    $("h1#text"+now).text(words[x+now-1][japanese]);
     $("main").css("transform","rotateX(0deg)");
+    console.log(words[x+now-1][japanese]);
 }
 
 function draw_turn(){
     if(ii === 0){
         $("main").css("transform","rotateX(90deg)");
         setTimeout(draw_turn0,300);
-        console.log(ii);
         ii++;
     }
     else if(ii === 1){
         $("main").css("transform","rotateX(90deg)");
         setTimeout(draw_turn1,300);
-        console.log(ii);
         ii--;
     }
 }
@@ -596,14 +671,12 @@ document.body.addEventListener( "touchstart", function( event ) {
 	var touchObject = event.changedTouches[0] ;
 
 	xs = touchObject.pageX ;
-    console.log(xs);
 } ) ;
 
 document.body.addEventListener( "touchend", function( event ) {
 	var touchObject = event.changedTouches[0] ;
 
 	xe = touchObject.pageX ;
-    console.log(xe);
 
     swipe();
 } ) ;
@@ -611,15 +684,12 @@ document.body.addEventListener( "touchend", function( event ) {
 function swipe() {
     if(cases === 2){
       if(xs + dist < xe && xs - xe < 0){//左から右へ　▶
-        console.log("▶");
         draw_left();
       }
       else if(xe < xs - dist && xs - xe > 0){//右から左へ　◀
-          console.log("◀");
           draw_right();
       }
       else if(xe === xe){
-          console.log("■");
           draw_turn();
       }
     }
@@ -631,7 +701,6 @@ window.addEventListener("keydown", handleKeydown);
 function handleKeydown(event){
   // キーコード
   var keyCode = event.keyCode;
-  console.log("押されたキーのコード : " + keyCode);
 
   //cases = 1;
 
@@ -662,6 +731,11 @@ function handleKeydown(event){
     }
 
 }
+
+
+
+
+
 
 
   
