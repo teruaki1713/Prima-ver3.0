@@ -1,5 +1,4 @@
-console.log("こ　う　し　ん");
-
+console.log("こ　う");
 var case_number = 1;
 
 var x=0;
@@ -26,7 +25,9 @@ $(".main_b").click(function(){
   shadow();
   $(".main_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
   $(".page1").css("display","block");
+  home1();
   home2();
+  words = old_words;
 });
 
 $(".card_b").click(function(){
@@ -34,6 +35,8 @@ $(".card_b").click(function(){
   $(".card_b").css("box-shadow","0 0 5px 2px rgba(69, 69, 201, 0.39)");
   $(".page2").css("display","block");
   home1();
+  home2();
+  words = old_words;
 });
 
 $(".list_b").click(function(){
@@ -42,6 +45,7 @@ $(".list_b").click(function(){
   $(".page3").css("display","block");
   home1();
   home2();
+  words = old_words;
 });
 
 function shadow() {
@@ -164,6 +168,7 @@ function home1 (){
   $(".main_4").css("display","none");
   $(".main_5").css("display","none");
   $(".main_1").css("display","block");
+  new_words = [];
   random=	0;
 	 i1=		0;
 	 answer=	0;
@@ -184,6 +189,10 @@ function home1 (){
    $("#WN").	text("0");
    document.form.reset();
    cases = 0;
+   words = old_words;
+   for(var iii = 0; iii < Part.length; iii++ ){
+    $(".select_1_"+(iii+1)).css("display","none");
+   }
 }
 
 function home2 (){
@@ -200,20 +209,30 @@ function home2 (){
   $(".card_1").css("display","block");
   cases = 0;
   $('main.card_main').html('');
+  for(var iii = 0; iii < Part.length; iii++ ){
+    $(".select_2_"+(iii+1)).css("display","none");
+   }
 }
 
 var japanese = 3;
 var english  = 3;
 
+var color1;
+var color2;
+
 
 $(".card_1_1").click(function() {
   japanese = 1;
   english  = 0;
+  color1 = "black";
+  color2 = "red";
 });
 
 $(".card_1_2").click(function() {
   japanese = 0;
   english  = 1;
+  color1 = "red";
+  color2 = "black";
 });
 
 $(".card_2_1").click(function(){$(".select_2_1").css("display","block");});
@@ -235,7 +254,8 @@ $(".p6").click(function(){
 
 function p6(){
   $(".now").text(now + 1);
-  console.log("aaa");
+  $("main.card_main").css("display","block");
+  $("main.card_main").css("transform","rotateX(0deg)");
 }
 
 
@@ -382,8 +402,8 @@ $(function(){
 	  $(".box_Q").fadeOut();
 	  $(".result").fadeOut();
 	  setTimeout('hid();',500);
-      setTimeout('$(".step1").fadeIn();',500);
-      location.reload();
+    setTimeout('$(".step1").fadeIn();',500);
+    location.reload();
   });
   
   function hid() {
@@ -420,12 +440,29 @@ $(function(){
 	 $("#QN").	text("0");
    $("#WN").	text("0");
    document.form.reset();
+   var canvas = document.getElementById("myChart");
+   var ctx = canvas.getContext('2d');
+   ctx.clearRect(0, 0, canvas.Width, canvas.Height);
    }
 
 
   //間違えた問題のみの処理
   const old_words = words;
   var new_words = [];
+
+
+  $(".only").click(function (){
+    words = new_words;
+    console.log(words[0][0] );
+    x = 1;
+    y = new_words.length;
+    console.log(x,y);
+    ques = question2;
+    more();
+    $(".main_5").css("display","none");
+    $(".main_4").css("display","block");
+    setTimeout(function(){new_words = [];},10);
+  });
   
   //ボタンを押した時の処理ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
   let ques = question3;
@@ -436,6 +473,10 @@ $(function(){
 
   $("#ano").click(function (){
 	  window.open(url);
+  });
+
+  $("#hin").click(function (){
+    alert("ヒント(先頭二文字)： "+ur.slice(0,2));
   });
 
   //採点ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -470,7 +511,7 @@ $(function(){
 	  {
 		  $check.text("❌"+"正解は　"+answer+"　です");
       $PN.text((Math.floor((ok/i1)*100)));
-      new_words.push([]);
+      new_words.push([ur,ja]);
 	  }
   }
   //問題表示関数ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
@@ -507,7 +548,8 @@ $(function(){
 	  i1++;
 	  $("#QN").text(i1);
 	  $("#check").text("問："+words[num2-1][1]);
-	  ur = words[num2-1][0];
+    ur = words[num2-1][0];
+    ja = words[num2-1][1];
 	  url = 'https://www.google.com/search?rlz=1C5CHFA_enJP892JP892&sxsrf=ALeKk00q8VFxTZwYwqx8jw6cM6r5cc74hQ%3A1598150874115&ei=2thBX8fKBs-JoAT_6LX4DA&q='+ur+'+発音';
 	  $("#WN").text((num2));
 	  answer = words[num2-1][0];
@@ -535,7 +577,8 @@ $(function(){
 	  norandom();
 	  $("#QN").text(i1);
 	  $("#check").text("問："+words[random7][1]);
-	  ur = words[random7][0];
+    ur = words[random7][0];
+    ja = words[random7][1];
 	  url = 'https://www.google.com/search?rlz=1C5CHFA_enJP892JP892&sxsrf=ALeKk00q8VFxTZwYwqx8jw6cM6r5cc74hQ%3A1598150874115&ei=2thBX8fKBs-JoAT_6LX4DA&q='+ur+'+発音';
 	  $("#WN").text((random7+1));
 	  answer = words[random7][0];
@@ -585,8 +628,7 @@ var y = 100;*/
 
 function pre() {
   for (var is=0; is < (y - x)+1 ; is++){
-    console.log(words[x+is-1][japanese]);
-    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(is)+'">'+words[x+is-1][japanese]+'</h1></div>');
+    $('main.card_main').append('<div class="box page" id="page'+(is)+'"><h1 class="text" id="text'+(is)+'" style="color: '+color2+';">'+words[x+is-1][japanese]+'</h1></div>');
     if(is>0){
       $('div#page'+(is)).css("display","none");
     }
@@ -636,17 +678,15 @@ function draw_left(){
 
 //回転
 function draw_turn0 (){
-    console.log("japanese:"+japanese,"english:"+english);
     $("h1#text"+now).text(words[x+now-1][english]);
+    $("h1#text"+now).css("color",color1);
     $("main").css("transform","rotateX(0deg)");
-    console.log(words[x+now-1][english]);
 }
 
 function draw_turn1 (){
-    console.log("japanese:"+japanese,"english:"+english);
     $("h1#text"+now).text(words[x+now-1][japanese]);
     $("main").css("transform","rotateX(0deg)");
-    console.log(words[x+now-1][japanese]);
+    $("h1#text"+now).css("color",color2);
 }
 
 function draw_turn(){
@@ -737,6 +777,3 @@ function handleKeydown(event){
 
 
 
-
-  
-  
