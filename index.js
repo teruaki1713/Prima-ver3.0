@@ -1,4 +1,4 @@
-console.log("こ　う");
+console.log("ok");
 var case_number = 1;
 
 var x=0;
@@ -224,15 +224,15 @@ var color2;
 $(".card_1_1").click(function() {
   japanese = 1;
   english  = 0;
-  color1 = "black";
-  color2 = "red";
+  color1 = "red";
+  color2 = "black";
 });
 
 $(".card_1_2").click(function() {
   japanese = 0;
   english  = 1;
-  color1 = "red";
-  color2 = "black";
+  color1 = "black";
+  color2 = "red";
 });
 
 $(".card_2_1").click(function(){$(".select_2_1").css("display","block");});
@@ -638,6 +638,7 @@ function pre() {
 //進む、戻る、裏返す
 var now =0;
 var ii = 0;
+const speed2 = 300;
 
 //切り替え
 function draw_after(){
@@ -647,6 +648,7 @@ function draw_after(){
     $("div#page"+now).css("display","block");
     ii=0;
     $(".now").text(now + 1);
+    $("h1#text"+now).css("color",color2);
 }
 
 function draw_before(){
@@ -656,13 +658,14 @@ function draw_before(){
     $("div#page"+now).css("display","block");
     ii=0;
     $(".now").text(now + 1);
+    $("h1#text"+now).css("color",color2);
 }
 
 function draw_right() {
     if(now+1 < (y - x + 1)){
       now++;
       $("main").css("transform","rotateY(90deg)");
-      setTimeout(draw_after,300);
+      setTimeout(draw_after,speed2);
     }
     
 }
@@ -671,7 +674,7 @@ function draw_left(){
     if(now-1 >= 0){
       now--;
       $("main").css("transform","rotateY(90deg)");
-    setTimeout(draw_before,300);
+    setTimeout(draw_before,speed2);
     }
     
 }
@@ -692,12 +695,12 @@ function draw_turn1 (){
 function draw_turn(){
     if(ii === 0){
         $("main").css("transform","rotateX(90deg)");
-        setTimeout(draw_turn0,300);
+        setTimeout(draw_turn0,speed2);
         ii++;
     }
     else if(ii === 1){
         $("main").css("transform","rotateX(90deg)");
-        setTimeout(draw_turn1,300);
+        setTimeout(draw_turn1,speed2);
         ii--;
     }
 }
@@ -771,9 +774,4 @@ function handleKeydown(event){
     }
 
 }
-
-
-
-
-
 
