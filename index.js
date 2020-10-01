@@ -1,4 +1,4 @@
-console.log("ok");
+console.log("");
 var case_number = 1;
 
 var x=0;
